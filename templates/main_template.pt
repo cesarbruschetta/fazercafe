@@ -1,15 +1,78 @@
-<html>
-	<header>
-		
-		<title>
-    		{% block title %}{% endblock %} - {{ website_title }}
-		</title>
-		
-	</header>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{% block title %}{% endblock %} - Quem Fez Cafe Liberiun</title>
+
+		<link href="/static/templatemo_style.css" rel="stylesheet" type="text/css" />
+		<link href="/static/deco.css" rel="stylesheet" type="text/css" />
+	    
+	    <script src="/static/js/jquery-1.2.1.pack.js" type="text/javascript"></script>
+	    <script src="/static/js/jquery-easing.1.2.pack.js" type="text/javascript"></script>
+	    <script src="/static/js/jquery-easing-compatibility.1.2.pack.js" type="text/javascript"></script>
+	    <script src="/static/js/coda-slider.1.1.1.pack.js" type="text/javascript"></script>
+	    
+	    <!-- 
+	    The CSS. You can of course have this in an external .css file if you like.
+	    Please note that not all these styles may be necessary for your use of Coda-Slider, so feel free to take out what you don't need.
+	    -->
+	    
+	    <!-- Initialize each slider on the page. Each slider must have a unique id -->
+	    <script type="text/javascript">
+	    jQuery(window).bind("load", function() {
+	    jQuery("div#slider1").codaSlider()
+	    // jQuery("div#slider2").codaSlider()
+	    // etc, etc. Beware of cross-linking difficulties if using multiple sliders on one page.
+	    });
+	    </script>
+	
+	</head>
 	<body>
 		
+		<div id="templatemo_wrapper_outer">
+			<div id="templatemo_wrapper_inner">
+			
+				<div id="templatemo_header">
+			        <div id="site_title">
+			        	<a href="/" target="_parent">
+			            	<img src="/static/images/templatemo_logo.png" alt="Logo" />
+			            </a>
+			        </div>
+			    </div> <!-- end of templatemo_header -->
+			    
+			    <div id="templatemo_content">
+			    <!-- start of slider -->
+					<div class="slider-wrap">
+						<div id="slider1" class="csw">
+							<div class="panelContainer">
+							
+								<div class="panel" title="Home Page">
+									<div class="wrapper">
+					                	{% block content %}{% endblock %}
+									</div>
+								</div>
+								<div class="panel" title="Sair">
+									<div class="wrapper">
+										<h2>Sair</h2>
+					                	<a href="/logout" alt="Sair" title="Sair">Click aqui para sair</a>
+									</div>
+								</div>
+								
+							</div><!-- .panelContainer -->
+						</div><!-- #slider1 -->
+					</div><!-- .slider-wrap -->
+			    <!-- end of slider -->
+			      
+				</div> 
+				<!-- end of templatemo_content -->
+			    <div id="templatemo_footer"><span class="coffee_cup"></span>
+				    Copyright © 2012 <a href="https://github.com/cesarbruschetta/" target="_blank">Cesar Augusto </a> | 
+			        Designed by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a> |
+			      
+				</div> <!-- end of templatemo_footer -->
+			</div> 
+		<!-- end of templatemo_wrapper_inner -->
+		</div> <!-- end of templatemo_wrapper_outer -->
 		
-		<div id="content">{% block content %}{% endblock %}</div>
 	</body>
-	
 </html>

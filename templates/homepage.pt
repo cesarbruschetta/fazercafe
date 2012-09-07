@@ -1,42 +1,46 @@
 {% extends "main_template.pt" %}
-{% block title %}Index{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block content %}
-    <h1>Quem fez cafe</h1>
+
     {% if not fezcafe %}
 		<form action="/" enctype="text/plain" method="post">
-			<input type="submit" value="Eu fiz cafe!!!" />
 			
+			<input style="font-weight: bold;height: 40px;" type="submit" class="submit_btn" name="submit" id="submit" 
+				value="Agora Eu ({{ user.email }}), fiz o cafe!!!"  />
 		</form>
 	{% endif %}
-
-	<h2>Ultimas pessoas a fazer o cafe</h2>
-	<table>
-		<tr>
-			<th>Email</th>
-			<th>Data</th>
-		</tr>
-		{% for item in dados %}
-			<tr>
-				<td>{{ item.userName  }}</td>
-				<td>{{ item.dateTimeText }}</td>
-			</tr>
-		{% endfor %}
-	</table>	
-	
-	<h2>Quantidade de vezes por pessoas</h2>
-	<table>
-		<tr>
-			<th>Email</th>
-			<th>Quantidade</th>
-		</tr>
-		{% for item in quantidade %}
-			<tr>
-				<td>{{ item.user.email  }}</td>
-				<td>{{ item.count }}</td>
-			</tr>
-		{% endfor %}
-	</table>	
-
-	
+	<br /><br />
+	<div class="row">
+		<div class="cell width-8 position-0">
+				<h1>Ultimas pessoas a fazer o cafe</h1>
+				<table>
+					<tr>
+						<th>Email</th>
+						<th>Data</th>
+					</tr>
+					{% for item in dados %}
+						<tr>
+							<td>{{ item.userName  }}</td>
+							<td>{{ item.dateTimeText }}</td>
+						</tr>
+					{% endfor %}
+				</table>	
+		</div>
+		<div class="cell width-8 position-8">
+			<h1>Quantidade de vezes por pessoas</h1>
+			<table>
+				<tr>
+					<th>Email</th>
+					<th>Quantidade</th>
+				</tr>
+				{% for item in quantidade %}
+					<tr>
+						<td>{{ item.user.email  }}</td>
+						<td>{{ item.count }}</td>
+					</tr>
+				{% endfor %}
+			</table>	
+		</div>
+	</div>
 {% endblock %}

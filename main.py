@@ -38,16 +38,18 @@ def doRender(handler, tname='index.html', values={}):
     handler.response.out.write(outstr)
     return True
 
-
-
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.out.write('Hello world!')
-
+        
+class Logout(webapp2.RequestHandler):
+    def get(self):
+        self.redirect(users.create_logout_url('/'))        
 
 class HomePageHandler(webapp2.RequestHandler):
     def get(self):
         context = {}
+        context['user'] = users.get_current_user()
         context['fezcafe'] = RegistraCafe.getJaFez()
         context['dados'] = RegistraCafe.getAll().fetch(5)
         context['quantidade'] = RegistraCafe.getQuantidadeCafe()
@@ -63,22 +65,9 @@ class HomePageHandler(webapp2.RequestHandler):
         fez.save()
         self.redirect('/')
 
-
-
-
-
-
-
-
-
-
-
-
-
 L = [('/', HomePageHandler),
-     ('/hello', MainHandler)
-     
+     ('/hello', MainHandler),
+     ('/logout', Logout),
      ]
-
 
 app = webapp2.WSGIApplication(L,debug=True)
