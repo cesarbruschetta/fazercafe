@@ -1,0 +1,4 @@
+cron:
+- description: app viva
+  url: /hello
+  schedule: every 10 minutes synchronized

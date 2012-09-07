@@ -1,0 +1,15 @@
+<html>
+	<header>
+		
+		<title>
+    		{% block title %}{% endblock %} - {{ website_title }}
+		</title>
+		
+	</header>
+	<body>
+		
+		
+		<div id="content">{% block content %}{% endblock %}</div>
+	</body>
+	
+</html>

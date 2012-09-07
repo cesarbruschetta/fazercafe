@@ -1,0 +1,42 @@
+{% extends "main_template.pt" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h1>Quem fez cafe</h1>
+    {% if not fezcafe %}
+		<form action="/" enctype="text/plain" method="post">
+			<input type="submit" value="Eu fiz cafe!!!" />
+			
+		</form>
+	{% endif %}
+
+	<h2>Ultimas pessoas a fazer o cafe</h2>
+	<table>
+		<tr>
+			<th>Email</th>
+			<th>Data</th>
+		</tr>
+		{% for item in dados %}
+			<tr>
+				<td>{{ item.userName  }}</td>
+				<td>{{ item.dateTimeText }}</td>
+			</tr>
+		{% endfor %}
+	</table>	
+	
+	<h2>Quantidade de vezes por pessoas</h2>
+	<table>
+		<tr>
+			<th>Email</th>
+			<th>Quantidade</th>
+		</tr>
+		{% for item in quantidade %}
+			<tr>
+				<td>{{ item.user.email  }}</td>
+				<td>{{ item.count }}</td>
+			</tr>
+		{% endfor %}
+	</table>	
+
+	
+{% endblock %}
