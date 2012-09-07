@@ -70,4 +70,5 @@ L = [('/', HomePageHandler),
      ('/logout', Logout),
      ]
 
-app = webapp2.WSGIApplication(L,debug=True)
+DEBUG = False
+app = webapp2.WSGIApplication(L,debug=DEBUG)
