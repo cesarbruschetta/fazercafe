@@ -11,7 +11,9 @@ class RegistraCafe(db.Model):
     
   @classmethod
   def getAll(self):
-    return RegistraCafe.all() #.fetch(100)
+    filter = db.GqlQuery("SELECT * FROM RegistraCafe ORDER BY date_creation DESC")
+
+    return filter #RegistraCafe.all() #.fetch(100)
 
   @classmethod
   def getJaFez(self):
