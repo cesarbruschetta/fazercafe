@@ -76,7 +76,7 @@ class HomePageHandler(webapp2.RequestHandler):
     def sendMail(self,send_to,date,user):
         msg = """   O Usuario %s Fez o cafe as %s .
 
-              """ %(user,datetime.now().strftime('%d/%m/%Y %H:%M:%s'))
+              """ %(user,date.strftime('%d/%m/%Y %H:%M'))
         
         
         message = mail.EmailMessage()
