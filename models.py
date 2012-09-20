@@ -4,6 +4,9 @@ from datetime import date, datetime
 
 timezone = 3
 
+def por_count(item):
+    return item.get('count','')
+
 class RegistraCafe(db.Model):
     
   user = db.UserProperty()
@@ -44,7 +47,7 @@ class RegistraCafe(db.Model):
           if not D in L:
             L.append(D)
       
-      return L
+      return sorted(L, key=por_count)
       
 
   @property

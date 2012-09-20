@@ -21,6 +21,8 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from datetime import datetime, timedelta
 
+from google.appengine.api import mail
+
 import os
 
 timezone = 3
@@ -63,7 +65,28 @@ class HomePageHandler(webapp2.RequestHandler):
         fez = RegistraCafe(user = user_logado,
                            date_creation = date)
         fez.save()
+        
+        todos_usuarios = RegistraCafe.getQuantidadeCafe()
+        for item in todos_usuarios:
+            user = item.get('user','')
+            self.sendMail(user.email(), date, user_logado.email())
+            
         self.redirect('/')
+        
+    def sendMail(self,send_to,date,user):
+        msg = """   O Usuario %s Fez o cafe as %s .
+
+              """ %(user,datetime.now().strftime('%d/%m/%Y %H:%M:%s'))
+        
+        
+        message = mail.EmailMessage()
+        message.sender = 'cesaraugusto@liberiun.com'
+        message.to = send_to
+        message.subject = '** AVISO - QUEM FEZ CAFE **'
+        message.body = msg.decode( 'utf-8', 'ignore')
+        message.send()        
+        
+        
 
 L = [('/', HomePageHandler),
      ('/hello', MainHandler),
