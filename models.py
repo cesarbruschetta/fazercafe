@@ -47,7 +47,7 @@ class RegistraCafe(db.Model):
           if not D in L:
             L.append(D)
       
-      return sorted(L, key=por_count)
+      return sorted(L, key=por_count,reverse=True)
       
 
   @property

@@ -60,16 +60,17 @@ class HomePageHandler(webapp2.RequestHandler):
         
     def post(self):
         user_logado = users.get_current_user()
-        
         date = datetime.now() - timedelta(hours=timezone)
-        fez = RegistraCafe(user = user_logado,
-                           date_creation = date)
-        fez.save()
         
-        todos_usuarios = RegistraCafe.getQuantidadeCafe()
-        for item in todos_usuarios:
-            user = item.get('user','')
-            self.sendMail(user.email(), date, user_logado.email())
+        if not RegistraCafe.getJaFez():
+            fez = RegistraCafe(user = user_logado,
+                               date_creation = date)
+            fez.save()
+        
+            todos_usuarios = RegistraCafe.getQuantidadeCafe()
+            for item in todos_usuarios:
+                user = item.get('user','')
+                self.sendMail(user.email(), date, user_logado.email())
             
         self.redirect('/')
         
