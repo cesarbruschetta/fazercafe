@@ -62,7 +62,8 @@ class HomePageHandler(webapp2.RequestHandler):
         user_logado = users.get_current_user()
         date = datetime.now() - timedelta(hours=timezone)
         
-        if not RegistraCafe.getJaFez():
+        if not RegistraCafe.getJaFez() and\
+			  (x.hour > 9 and x.hour < 18):
             fez = RegistraCafe(user = user_logado,
                                date_creation = date)
             fez.save()
