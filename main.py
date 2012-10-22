@@ -25,7 +25,12 @@ from google.appengine.api import mail
 
 import os
 
-timezone = 3
+# HOrario de verão
+timezone = 4
+
+#Horario Normal
+#timezone = 3
+
 
 def doRender(handler, tname='index.html', values={}):
     temp = os.path.join(os.path.dirname(__file__),'templates/' + tname)

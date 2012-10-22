@@ -2,7 +2,11 @@ from google.appengine.ext import db
 
 from datetime import date, datetime
 
-timezone = 3
+# HOrario de verão
+timezone = 4
+
+#Horario Normal
+#timezone = 3
 
 def por_count(item):
     return item.get('count','')
