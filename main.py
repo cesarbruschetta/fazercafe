@@ -1,3 +1,4 @@
+# coding: utf-8
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -26,7 +27,7 @@ from google.appengine.api import mail
 import os
 
 # HOrario de verão
-timezone = 4
+timezone = 2
 
 #Horario Normal
 #timezone = 3

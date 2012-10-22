@@ -1,9 +1,10 @@
+# coding: utf-8
 from google.appengine.ext import db
 
 from datetime import date, datetime
 
 # HOrario de verão
-timezone = 4
+timezone = 2
 
 #Horario Normal
 #timezone = 3
