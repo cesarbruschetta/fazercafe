@@ -27,10 +27,10 @@ from google.appengine.api import mail
 import os
 
 # HOrario de verão
-timezone = 2
+#timezone = 2
 
 #Horario Normal
-#timezone = 3
+timezone = 3
 
 
 def doRender(handler, tname='index.html', values={}):
