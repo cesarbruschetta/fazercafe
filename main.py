@@ -71,6 +71,7 @@ class HomePageHandler(webapp2.RequestHandler):
         if not RegistraCafe.getJaFez() and\
 			  (date.hour >= 9 and date.hour < 18) and\
               (date.weekday() != 5 and date.weekday() != 6):
+            
             fez = RegistraCafe(user = user_logado,
                                date_creation = date)
             fez.save()

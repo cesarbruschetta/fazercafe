@@ -35,7 +35,9 @@ class RegistraCafe(db.Model):
           end_date = datetime(now.year,now.month,now.day,23,59,0)
     
       
-      result = RegistraCafe.all().filter("date_creation >=", start_date).filter("date_creation <=", end_date)
+      #result = RegistraCafe.all().filter("date_creation >=", start_date).filter("date_creation <=", end_date)
+      result = db.GqlQuery("SELECT * FROM RegistraCafe WHERE date_creation >= :1  AND date_creation <= :2 ", start_date,end_date)
+      
       return result.count()
 
   @classmethod
