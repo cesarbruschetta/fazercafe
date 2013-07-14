@@ -23,6 +23,7 @@ from google.appengine.api import users
 from datetime import datetime, timedelta
 
 from google.appengine.api import mail
+from google.appengine.api import memcache
 
 import os
 
@@ -56,12 +57,17 @@ class Logout(webapp2.RequestHandler):
 
 class HomePageHandler(webapp2.RequestHandler):
     def get(self):
-        context = {}
+
+        context = memcache.get('context_home')
+        if not context:
+            context = {}
+            context['fezcafe'] = RegistraCafe.getJaFez()
+            context['dados'] = RegistraCafe.getAll().fetch(5)
+            context['quantidade'] = RegistraCafe.getQuantidadeCafe()
+
+            memcache.add('context_home',context, 21600)
+
         context['user'] = users.get_current_user()
-        context['fezcafe'] = RegistraCafe.getJaFez()
-        context['dados'] = RegistraCafe.getAll().fetch(5)
-        context['quantidade'] = RegistraCafe.getQuantidadeCafe()
-        
         doRender(self,'homepage.pt',context)
         
     def post(self):
@@ -75,6 +81,7 @@ class HomePageHandler(webapp2.RequestHandler):
             fez = RegistraCafe(user = user_logado,
                                date_creation = date)
             fez.save()
+            memcache.delete('context_home')
         
             todos_usuarios = RegistraCafe.getQuantidadeCafe()
             for item in todos_usuarios:

@@ -5,8 +5,8 @@
 
     {% if not fezcafe %}
 		<form action="/" enctype="text/plain" method="post">
-			
-			<input style="font-weight: bold;height: 40px;" type="submit" class="submit_btn" name="submit" id="submit" 
+
+			<input style="font-weight: bold;height: 40px;" type="submit" class="submit_btn" name="submit" id="submit"
 				value="Agora Eu ({{ user.email }}), fiz o cafe!!!"  />
 		</form>
 	{% endif %}
@@ -25,9 +25,9 @@
 							<td>{{ item.dateTimeText }}</td>
 						</tr>
 					{% endfor %}
-				</table>	
+				</table>
 		</div>
-		<div class="cell width-8 position-8">
+		<div class="cell width-8 position-8" style="overflow-y: auto;height: 290px;" >
 			<h1>Quantidade de vezes por pessoas</h1>
 			<table>
 				<tr>
@@ -40,7 +40,7 @@
 						<td>{{ item.count }}</td>
 					</tr>
 				{% endfor %}
-			</table>	
+			</table>
 		</div>
 	</div>
 {% endblock %}

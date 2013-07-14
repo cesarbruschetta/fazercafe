@@ -47,7 +47,9 @@ class RegistraCafe(db.Model):
       L = []
       for item in dados:
           D = {}
-          result =  RegistraCafe.all().filter('user =',item.user)
+#          result =  RegistraCafe.all().filter('user =',item.user)
+ 	  result = db.GqlQuery("SELECT * FROM RegistraCafe WHERE user = :1 ",item.user)
+
           D['user'] = item.user
           D['count'] = result.count()
           
