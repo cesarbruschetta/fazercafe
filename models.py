@@ -18,7 +18,7 @@ class RegistraCafe(db.Model):
   date_creation = db.DateTimeProperty()
     
   @classmethod
-  def getAll(self):
+  def getAll(self, limit=0):
     filter = db.GqlQuery("SELECT * FROM RegistraCafe ORDER BY date_creation DESC")
 
     return filter #RegistraCafe.all() #.fetch(100)
@@ -37,7 +37,7 @@ class RegistraCafe(db.Model):
       
       #result = RegistraCafe.all().filter("date_creation >=", start_date).filter("date_creation <=", end_date)
       result = db.GqlQuery("SELECT * FROM RegistraCafe WHERE date_creation >= :1  AND date_creation <= :2 ", start_date,end_date)
-      
+     
       return result.count()
 
   @classmethod
@@ -46,14 +46,14 @@ class RegistraCafe(db.Model):
       
       L = []
       for item in dados:
-          D = {}
-#          result =  RegistraCafe.all().filter('user =',item.user)
- 	  result = db.GqlQuery("SELECT * FROM RegistraCafe WHERE user = :1 ",item.user)
+        D = {}
+        #result =  RegistraCafe.all().filter('user =',item.user)
+        result = db.GqlQuery("SELECT * FROM RegistraCafe WHERE user = :1 ",item.user)
 
-          D['user'] = item.user
-          D['count'] = result.count()
-          
-          if not D in L:
+        D['user_email'] = item.user.email()
+        D['count'] = result.count()
+
+        if not D in L:
             L.append(D)
       
       return sorted(L, key=por_count,reverse=True)

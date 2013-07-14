@@ -21,7 +21,7 @@
 					</tr>
 					{% for item in dados %}
 						<tr>
-							<td>{{ item.userName  }}</td>
+							<td>{{ item.username  }}</td>
 							<td>{{ item.dateTimeText }}</td>
 						</tr>
 					{% endfor %}
@@ -36,7 +36,7 @@
 				</tr>
 				{% for item in quantidade %}
 					<tr>
-						<td>{{ item.user.email  }}</td>
+						<td>{{ item.user_email  }}</td>
 						<td>{{ item.count }}</td>
 					</tr>
 				{% endfor %}

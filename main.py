@@ -33,6 +33,8 @@ import os
 #Horario Normal
 timezone = 3
 
+#Modo de desenvolvimento
+DEBUG = False
 
 def doRender(handler, tname='index.html', values={}):
     temp = os.path.join(os.path.dirname(__file__),'templates/' + tname)
@@ -62,7 +64,13 @@ class HomePageHandler(webapp2.RequestHandler):
         if not context:
             context = {}
             context['fezcafe'] = RegistraCafe.getJaFez()
-            context['dados'] = RegistraCafe.getAll().fetch(5)
+
+            L = []
+            for item in RegistraCafe.getAll().fetch(5):
+                L.append({'username': item.userName,
+                           'dateTimeText': item.dateTimeText})
+
+            context['dados'] = L
             context['quantidade'] = RegistraCafe.getQuantidadeCafe()
 
             memcache.add('context_home',context, 21600)
@@ -76,7 +84,7 @@ class HomePageHandler(webapp2.RequestHandler):
         
         if not RegistraCafe.getJaFez() and\
 			  (date.hour >= 9 and date.hour < 18) and\
-              (date.weekday() != 5 and date.weekday() != 6):
+              (date.weekday() != 5 and date.weekday() != 6) or DEBUG == True:
             
             fez = RegistraCafe(user = user_logado,
                                date_creation = date)
@@ -85,8 +93,8 @@ class HomePageHandler(webapp2.RequestHandler):
         
             todos_usuarios = RegistraCafe.getQuantidadeCafe()
             for item in todos_usuarios:
-                user = item.get('user','')
-                self.sendMail(user.email(), date, user_logado.email())
+                user = item.get('user_email','')
+                self.sendMail(user, date, user_logado.email())
             
         self.redirect('/')
         
@@ -110,5 +118,5 @@ L = [('/', HomePageHandler),
      ('/logout', Logout),
      ]
 
-DEBUG = False
+
 app = webapp2.WSGIApplication(L,debug=DEBUG)
