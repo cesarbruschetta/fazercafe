@@ -1,0 +1,13 @@
+Django==1.5.2
+distribute==0.6.28
+dj-database-url==0.2.2
+django-pylibmc-sasl==0.2.4
+django-social-auth==0.7.20
+gunicorn==17.5
+httplib2==0.8
+oauth2==1.5.211
+psycopg2==2.5.1
+pylibmc==1.2.2
+python-memcached==1.53
+python-openid==2.2.5
+wsgiref==0.1.2

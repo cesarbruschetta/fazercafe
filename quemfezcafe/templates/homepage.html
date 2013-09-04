@@ -1,0 +1,47 @@
+{% extends "main_template.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+
+    {% if not fezcafe %}
+		<form action="." method="post">
+ 			{% csrf_token %}
+
+			<input style="font-weight: bold;height: 40px;" type="submit" class="submit_btn" name="submit" id="submit"
+				value="Agora Eu ({{ user.email }}), fiz o cafe!!!"  />
+		</form>
+	{% endif %}
+	<br /><br />
+	<div class="row">
+		<div class="cell width-8 position-0">
+				<h1>Ultimas pessoas a fazer o cafe</h1>
+				<table>
+					<tr>
+						<th>Email</th>
+						<th>Data</th>
+					</tr>
+					{% for item in dados %}
+						<tr>
+							<td>{{ item.username  }}</td>
+							<td>{{ item.dateTimeText }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+		</div>
+		<div class="cell width-8 position-8" style="overflow-y: auto;height: 290px;" >
+			<h1>Quantidade de vezes por pessoas</h1>
+			<table>
+				<tr>
+					<th>Email</th>
+					<th>Quantidade</th>
+				</tr>
+				{% for item in quantidade %}
+					<tr>
+						<td>{{ item.user_email  }}</td>
+						<td>{{ item.count }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+{% endblock %}
