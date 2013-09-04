@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 
 from quemfezcafe.app.models import RegistraCafe
 
+DEBUG = False
 
 # HOrario de verão
 #timezone = 2
@@ -48,7 +49,7 @@ def home(request):
 	#Criação de novo Cafe        
 	if request.method == 'POST':
 		date = datetime.now() - timedelta(hours=timezone)
-		
+
 		if not RegistraCafe.getJaFez() and\
 			(date.hour >= 9 and date.hour < 18) and\
 			(date.weekday() != 5 and date.weekday() != 6) or DEBUG == True:
