@@ -25,7 +25,7 @@ timezone = 3
 @login_required
 def home(request):
 	template = 'homepage.html'
-	# import pdb;pdb.set_trace()
+	
 	user_logado = request.user
 
 	context = memcache.get('context_home')
@@ -48,7 +48,7 @@ def home(request):
 	#Criação de novo Cafe        
 	if request.method == 'POST':
 		date = datetime.now() - timedelta(hours=timezone)
-		import pdb;pdb.set_trace()
+		
 		if not RegistraCafe.getJaFez() and\
 			(date.hour >= 9 and date.hour < 18) and\
 			(date.weekday() != 5 and date.weekday() != 6) or DEBUG == True:
